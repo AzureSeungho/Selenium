@@ -1,0 +1,43 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.keys import Keys
+import pyperclip
+from selenium.webdriver.support.ui import Select
+
+driver = webdriver.Chrome('C:\chromedriver.exe')
+
+driver.get('https://codeup.kr/')
+driver.maximize_window()
+time.sleep(2)
+
+driver.find_element('xpath','//*[@id="navbarNavDropdown"]/ul[2]/li[2]/a').click()
+
+codeup_id = driver.find_element('name','user_id')
+codeup_pw = driver.find_element('name','password')
+
+codeup_id.click()
+pyperclip.copy('id')
+codeup_id.send_keys(Keys.CONTROL,'v')
+time.sleep(2)
+codeup_pw.click()
+pyperclip.copy('pw')
+codeup_pw.send_keys(Keys.CONTROL,'v')
+time.sleep(2)
+driver.find_element('xpath','/html/body/div[2]/form/input').click()
+
+
+for i in range(1,10):
+    driver.get('https://codeup.kr/problem.php?id=600' + str(i))
+    time.sleep(1)
+    driver.find_element('xpath','/html/body/main/div/div[3]/a[1]').click()
+    time.sleep(1)
+    select = Select(driver.find_element('id','language'))
+    select.select_by_value('6')
+    driver.find_element('xpath','//*[@id="source"]/textarea').send_keys('print("Hello")')
+    time.sleep(1)
+    
+    driver.find_element('xpath','//*[@id="Submit"]').click()
+    time.sleep(7)
+
+time.sleep(5)
+driver.close

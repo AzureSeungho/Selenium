@@ -1,0 +1,25 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.keys import Keys
+import pyperclip
+
+driver = webdriver.Chrome('C:\chromedriver.exe')
+
+driver.get('http://www.naver.com')
+time.sleep(1)
+
+driver.find_element('xpath','//*[@id="account"]/a').click()
+
+naver_id = driver.find_element('name','id')
+naver_pw = driver.find_element('name','pw')
+
+naver_id.click()
+pyperclip.copy('ekdnsdkqhslp')
+naver_id.send_keys(Keys.CONTROL,'v')
+time.sleep(1)
+naver_pw.click()
+pyperclip.copy('123qwer45t')
+naver_pw.send_keys(Keys.CONTROL,'v')
+time.sleep(2)
+
+driver.find_element('xpath','//*[@id="log.login"]').click()

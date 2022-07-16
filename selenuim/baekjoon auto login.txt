@@ -1,0 +1,24 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.keys import Keys
+import pyperclip
+
+driver = webdriver.Chrome('C:\chromedriver.exe')
+
+driver.get('https://www.acmicpc.net/login?next=%2F')
+time.sleep(1)
+
+baekjoon_id = driver.find_element('name','login_user_id')
+baekjoon_pw = driver.find_element('name','login_password')
+
+baekjoon_id.click()
+pyperclip.copy('id')
+baekjoon_id.send_keys(Keys.CONTROL,'v')
+time.sleep(1)
+
+baekjoon_pw.click()
+pyperclip.copy('pw')
+baekjoon_pw.send_keys(Keys.CONTROL,'v')
+time.sleep(1)
+
+driver.find_element('xpath','//*[@id="submit_button"]').click()

@@ -1,0 +1,25 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.keys import Keys
+import pyperclip
+
+driver = webdriver.Chrome('C:\chromedriver.exe')
+
+driver.get('https://github.com/login')
+time.sleep(1)
+
+github_id = driver.find_element('name','login')
+github_pw = driver.find_element('name','password')
+time.sleep(1)
+
+
+github_id.click()
+pyperclip.copy('id')
+github_id.send_keys(Keys.CONTROL,'v')
+time.sleep(1)
+github_pw.click()
+pyperclip.copy('pw')
+github_pw.send_keys(Keys.CONTROL,'v')
+time.sleep(2)
+
+driver.find_element('xpath','//*[@id="login"]/div[4]/form/div/input[12]').click()
